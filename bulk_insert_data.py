@@ -1,7 +1,7 @@
 """
 Bulk Insert Script for API Aadhar Data
 This script reads the combined CSV files and inserts them into the corresponding SQL Server tables.
-Uses Azure Entra ID (Azure AD) authentication.
+Uses Azure Entra ID (Azure AD) authentication with fast_executemany for bulk performance.
 """
 
 import pandas as pd
@@ -41,7 +41,7 @@ DATASETS = [
     }
 ]
 
-BATCH_SIZE = 10000  # Number of rows to insert per batch
+BATCH_SIZE = 50000  # Number of rows to insert per batch (increased for better performance)
 
 
 def get_access_token():
@@ -87,23 +87,30 @@ def get_connection():
     # SQL_COPT_SS_ACCESS_TOKEN attribute
     SQL_COPT_SS_ACCESS_TOKEN = 1256
     
-    return pyodbc.connect(connection_string, attrs_before={SQL_COPT_SS_ACCESS_TOKEN: token_struct})
+    conn = pyodbc.connect(connection_string, attrs_before={SQL_COPT_SS_ACCESS_TOKEN: token_struct})
+    return conn
 
 
-def truncate_table(cursor, table_name):
+def truncate_table(conn, table_name):
     """Truncate a table before inserting new data."""
     print(f'>> Truncating Table: {table_name}')
+    cursor = conn.cursor()
     cursor.execute(f'TRUNCATE TABLE {table_name}')
-    cursor.commit()
+    conn.commit()
+    cursor.close()
 
 
-def bulk_insert_dataframe(cursor, df, table_name, columns):
-    """Insert a DataFrame into SQL Server table in batches."""
+def bulk_insert_dataframe(conn, df, table_name, columns):
+    """Insert a DataFrame into SQL Server table using fast_executemany for bulk performance."""
     placeholders = ', '.join(['?' for _ in columns])
     insert_sql = f"INSERT INTO {table_name} ({', '.join(columns)}) VALUES ({placeholders})"
     
     total_rows = len(df)
     inserted = 0
+    
+    # Create cursor with fast_executemany enabled for bulk insert performance
+    cursor = conn.cursor()
+    cursor.fast_executemany = True  # This is the key for bulk insert performance!
     
     for start in range(0, total_rows, BATCH_SIZE):
         end = min(start + BATCH_SIZE, total_rows)
@@ -113,15 +120,16 @@ def bulk_insert_dataframe(cursor, df, table_name, columns):
         data = [tuple(row) for row in batch.values]
         
         cursor.executemany(insert_sql, data)
-        cursor.commit()
+        conn.commit()
         
         inserted += len(data)
         print(f'   Inserted {inserted:,} / {total_rows:,} rows ({(inserted/total_rows)*100:.1f}%)')
     
+    cursor.close()
     return total_rows
 
 
-def process_dataset(cursor, dataset_info):
+def process_dataset(conn, dataset_info):
     """Process a single dataset: read CSV, truncate table, and insert data."""
     csv_path = os.path.join(DATASETS_PATH, dataset_info['csv_file'])
     table_name = dataset_info['table_name']
@@ -140,12 +148,18 @@ def process_dataset(cursor, dataset_info):
     # Convert date column to proper format
     df['date_of_data'] = pd.to_datetime(df['date_of_data'], format='%d-%m-%Y').dt.strftime('%Y-%m-%d')
     
+    # Convert numeric columns to appropriate types to avoid type issues
+    for col in columns[4:]:  # Skip date, state, district, pincode
+        df[col] = pd.to_numeric(df[col], errors='coerce').fillna(0).astype(int)
+    
+    df['pincode'] = pd.to_numeric(df['pincode'], errors='coerce').fillna(0).astype(int)
+    
     # Truncate table
-    truncate_table(cursor, table_name)
+    truncate_table(conn, table_name)
     
     # Bulk insert
-    print(f'   Inserting {len(df):,} rows...')
-    row_count = bulk_insert_dataframe(cursor, df, table_name, columns)
+    print(f'   Inserting {len(df):,} rows using fast_executemany...')
+    row_count = bulk_insert_dataframe(conn, df, table_name, columns)
     
     print(f'>> Completed: {table_name} ({row_count:,} rows inserted)')
     return row_count
@@ -162,13 +176,12 @@ def main():
         # Connect to database
         print('\nConnecting to SQL Server...')
         conn = get_connection()
-        cursor = conn.cursor()
         print('Connected successfully!')
         
         # Process each dataset
         results = {}
         for dataset in DATASETS:
-            row_count = process_dataset(cursor, dataset)
+            row_count = process_dataset(conn, dataset)
             results[dataset['table_name']] = row_count
         
         # Print summary
@@ -190,7 +203,6 @@ def main():
         print('=' * 50)
         
         # Close connection
-        cursor.close()
         conn.close()
         print('\nBulk Insert Completed Successfully!')
         
