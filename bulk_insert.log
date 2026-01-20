@@ -1,0 +1,145 @@
+==================================================
+Bulk Insert Script for API Aadhar Data
+==================================================
+
+Connecting to SQL Server...
+   Acquiring Azure Entra ID token...
+Connected successfully!
+
+>> Processing: api_data_aadhar_biometric_combined.csv
+   Target Table: api_data_aadhar_biometric
+   Reading CSV file...
+>> Truncating Table: api_data_aadhar_biometric
+   Inserting 1,861,108 rows using fast_executemany...
+   Inserted 50,000 / 1,861,108 rows (2.7%)
+   Inserted 100,000 / 1,861,108 rows (5.4%)
+   Inserted 150,000 / 1,861,108 rows (8.1%)
+   Inserted 200,000 / 1,861,108 rows (10.7%)
+   Inserted 250,000 / 1,861,108 rows (13.4%)
+   Inserted 300,000 / 1,861,108 rows (16.1%)
+   Inserted 350,000 / 1,861,108 rows (18.8%)
+   Inserted 400,000 / 1,861,108 rows (21.5%)
+   Inserted 450,000 / 1,861,108 rows (24.2%)
+   Inserted 500,000 / 1,861,108 rows (26.9%)
+   Inserted 550,000 / 1,861,108 rows (29.6%)
+   Inserted 600,000 / 1,861,108 rows (32.2%)
+   Inserted 650,000 / 1,861,108 rows (34.9%)
+   Inserted 700,000 / 1,861,108 rows (37.6%)
+   Inserted 750,000 / 1,861,108 rows (40.3%)
+   Inserted 800,000 / 1,861,108 rows (43.0%)
+   Inserted 850,000 / 1,861,108 rows (45.7%)
+   Inserted 900,000 / 1,861,108 rows (48.4%)
+   Inserted 950,000 / 1,861,108 rows (51.0%)
+   Inserted 1,000,000 / 1,861,108 rows (53.7%)
+   Inserted 1,050,000 / 1,861,108 rows (56.4%)
+   Inserted 1,100,000 / 1,861,108 rows (59.1%)
+   Inserted 1,150,000 / 1,861,108 rows (61.8%)
+   Inserted 1,200,000 / 1,861,108 rows (64.5%)
+   Inserted 1,250,000 / 1,861,108 rows (67.2%)
+   Inserted 1,300,000 / 1,861,108 rows (69.9%)
+   Inserted 1,350,000 / 1,861,108 rows (72.5%)
+   Inserted 1,400,000 / 1,861,108 rows (75.2%)
+   Inserted 1,450,000 / 1,861,108 rows (77.9%)
+   Inserted 1,500,000 / 1,861,108 rows (80.6%)
+   Inserted 1,550,000 / 1,861,108 rows (83.3%)
+   Inserted 1,600,000 / 1,861,108 rows (86.0%)
+   Inserted 1,650,000 / 1,861,108 rows (88.7%)
+   Inserted 1,700,000 / 1,861,108 rows (91.3%)
+   Inserted 1,750,000 / 1,861,108 rows (94.0%)
+   Inserted 1,800,000 / 1,861,108 rows (96.7%)
+   Inserted 1,850,000 / 1,861,108 rows (99.4%)
+   Inserted 1,861,108 / 1,861,108 rows (100.0%)
+>> Completed: api_data_aadhar_biometric (1,861,108 rows inserted)
+
+>> Processing: api_data_aadhar_demographic_combined.csv
+   Target Table: api_data_aadhar_demographic
+   Reading CSV file...
+>> Truncating Table: api_data_aadhar_demographic
+   Inserting 2,071,700 rows using fast_executemany...
+   Inserted 50,000 / 2,071,700 rows (2.4%)
+   Inserted 100,000 / 2,071,700 rows (4.8%)
+   Inserted 150,000 / 2,071,700 rows (7.2%)
+   Inserted 200,000 / 2,071,700 rows (9.7%)
+   Inserted 250,000 / 2,071,700 rows (12.1%)
+   Inserted 300,000 / 2,071,700 rows (14.5%)
+   Inserted 350,000 / 2,071,700 rows (16.9%)
+   Inserted 400,000 / 2,071,700 rows (19.3%)
+   Inserted 450,000 / 2,071,700 rows (21.7%)
+   Inserted 500,000 / 2,071,700 rows (24.1%)
+   Inserted 550,000 / 2,071,700 rows (26.5%)
+   Inserted 600,000 / 2,071,700 rows (29.0%)
+   Inserted 650,000 / 2,071,700 rows (31.4%)
+   Inserted 700,000 / 2,071,700 rows (33.8%)
+   Inserted 750,000 / 2,071,700 rows (36.2%)
+   Inserted 800,000 / 2,071,700 rows (38.6%)
+   Inserted 850,000 / 2,071,700 rows (41.0%)
+   Inserted 900,000 / 2,071,700 rows (43.4%)
+   Inserted 950,000 / 2,071,700 rows (45.9%)
+   Inserted 1,000,000 / 2,071,700 rows (48.3%)
+   Inserted 1,050,000 / 2,071,700 rows (50.7%)
+   Inserted 1,100,000 / 2,071,700 rows (53.1%)
+   Inserted 1,150,000 / 2,071,700 rows (55.5%)
+   Inserted 1,200,000 / 2,071,700 rows (57.9%)
+   Inserted 1,250,000 / 2,071,700 rows (60.3%)
+   Inserted 1,300,000 / 2,071,700 rows (62.8%)
+   Inserted 1,350,000 / 2,071,700 rows (65.2%)
+   Inserted 1,400,000 / 2,071,700 rows (67.6%)
+   Inserted 1,450,000 / 2,071,700 rows (70.0%)
+   Inserted 1,500,000 / 2,071,700 rows (72.4%)
+   Inserted 1,550,000 / 2,071,700 rows (74.8%)
+   Inserted 1,600,000 / 2,071,700 rows (77.2%)
+   Inserted 1,650,000 / 2,071,700 rows (79.6%)
+   Inserted 1,700,000 / 2,071,700 rows (82.1%)
+   Inserted 1,750,000 / 2,071,700 rows (84.5%)
+   Inserted 1,800,000 / 2,071,700 rows (86.9%)
+   Inserted 1,850,000 / 2,071,700 rows (89.3%)
+   Inserted 1,900,000 / 2,071,700 rows (91.7%)
+   Inserted 1,950,000 / 2,071,700 rows (94.1%)
+   Inserted 2,000,000 / 2,071,700 rows (96.5%)
+   Inserted 2,050,000 / 2,071,700 rows (99.0%)
+   Inserted 2,071,700 / 2,071,700 rows (100.0%)
+>> Completed: api_data_aadhar_demographic (2,071,700 rows inserted)
+
+>> Processing: api_data_aadhar_enrolment_combined.csv
+   Target Table: api_data_aadhar_enrollment
+   Reading CSV file...
+>> Truncating Table: api_data_aadhar_enrollment
+   Inserting 1,006,029 rows using fast_executemany...
+   Inserted 50,000 / 1,006,029 rows (5.0%)
+   Inserted 100,000 / 1,006,029 rows (9.9%)
+   Inserted 150,000 / 1,006,029 rows (14.9%)
+   Inserted 200,000 / 1,006,029 rows (19.9%)
+   Inserted 250,000 / 1,006,029 rows (24.9%)
+   Inserted 300,000 / 1,006,029 rows (29.8%)
+   Inserted 350,000 / 1,006,029 rows (34.8%)
+   Inserted 400,000 / 1,006,029 rows (39.8%)
+   Inserted 450,000 / 1,006,029 rows (44.7%)
+   Inserted 500,000 / 1,006,029 rows (49.7%)
+   Inserted 550,000 / 1,006,029 rows (54.7%)
+   Inserted 600,000 / 1,006,029 rows (59.6%)
+   Inserted 650,000 / 1,006,029 rows (64.6%)
+   Inserted 700,000 / 1,006,029 rows (69.6%)
+   Inserted 750,000 / 1,006,029 rows (74.6%)
+   Inserted 800,000 / 1,006,029 rows (79.5%)
+   Inserted 850,000 / 1,006,029 rows (84.5%)
+   Inserted 900,000 / 1,006,029 rows (89.5%)
+   Inserted 950,000 / 1,006,029 rows (94.4%)
+   Inserted 1,000,000 / 1,006,029 rows (99.4%)
+   Inserted 1,006,029 / 1,006,029 rows (100.0%)
+>> Completed: api_data_aadhar_enrollment (1,006,029 rows inserted)
+
+==================================================
+Bulk Insert Summary
+==================================================
+  api_data_aadhar_biometric: 1,861,108 rows
+  api_data_aadhar_demographic: 2,071,700 rows
+  api_data_aadhar_enrollment: 1,006,029 rows
+
+  Total Rows Inserted: 4,938,837
+
+  Start Time: 2026-01-17 14:18:20
+  End Time: 2026-01-17 15:14:10
+  Duration: 3349.93 seconds
+==================================================
+
+Bulk Insert Completed Successfully!
